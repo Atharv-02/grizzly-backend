@@ -1,6 +1,10 @@
 //JWT TOKEN PINATA - eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiJiYzdmZTcxYi0xYjUzLTQ2NWYtODA1NC04MTA2ZGZmNGM1NGMiLCJlbWFpbCI6Im1lYXRoYXJ2Z3VsYXRpQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJwaW5fcG9saWN5Ijp7InJlZ2lvbnMiOlt7ImlkIjoiRlJBMSIsImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxfSx7ImlkIjoiTllDMSIsImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxfV0sInZlcnNpb24iOjF9LCJtZmFfZW5hYmxlZCI6ZmFsc2UsInN0YXR1cyI6IkFDVElWRSJ9LCJhdXRoZW50aWNhdGlvblR5cGUiOiJzY29wZWRLZXkiLCJzY29wZWRLZXlLZXkiOiJmZWJiOWZkYTg3MWE1NDFjOTRlNiIsInNjb3BlZEtleVNlY3JldCI6IjkxZTVkOWEwMzcyNTE5ZDEwYzNmYTc5NzU0ZGQzNzYyNDU1ZmY0ODZjYTE1YjYzNjc5NTU4MTYxZTIwZTM0NjAiLCJpYXQiOjE2Nzg2MzA5MDN9.bGv32ui6F_JBAVuaE5E1nen723cE496wkSRKDzLxnEo
 const express = require("express");
+var mongoose = require("mongoose");
+const { ObjectId } = require("mongodb");
 const app = express();
+// const ObjectId = require("mongodb").ObjectId;
+const ObjectID = require("mongodb").ObjectId;
 const axios = require("axios");
 const hashes = require("./models/tasks");
 require("dotenv").config();
@@ -86,9 +90,12 @@ app.get("/all-nft", async (req, res) => {
 
   res.json(sendData);
 });
-app.post("/single-nft", async (req, res) => {
-  const singleHash = await hashes.findOne({ _id: req.body[`id`] });
-  res.send(singleHash);
+app.get("/single-nft/:id", async (req, res) => {
+  const { id: taskID } = req.params;
+  console.log(taskID);
+  const task = await hashes.findOne({ _id: new ObjectID(taskID) });
+  console.log(taskID);
+  res.send("singleHash");
 });
 const port = 5500;
 const start = async () => {
