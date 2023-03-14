@@ -86,6 +86,10 @@ app.get("/all-nft", async (req, res) => {
 
   res.json(sendData);
 });
+app.post("/single-nft", async (req, res) => {
+  const singleHash = await hashes.findOne({ _id: req.body[`id`] });
+  res.send(singleHash);
+});
 const port = 5500;
 const start = async () => {
   try {
