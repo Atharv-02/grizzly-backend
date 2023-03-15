@@ -53,18 +53,7 @@ app.post("/send", async (req, res) => {
 
   console.log(result.data);
 
-  var data = JSON.stringify({
-    ipfsPinHash: "bafkreicjmxc2drbgxtoidx6xfatbffyx46oiyo6ktipss6dhdermwtsoze",
-    name: "testing",
-    keyvalues: {
-      hi: "value",
-    },
-    pinataContent: {
-      some: "somev",
-    },
-  });
-
-  res.send("hello");
+  res.send(result.data);
 });
 app.post("/delete", async (req, res) => {
   var config = {
