@@ -34,7 +34,7 @@ app.post("/send", async (req, res) => {
       },
     },
     pinataContent: {
-      some: "somevalue",
+      metaData: req.body,
     },
   });
 
