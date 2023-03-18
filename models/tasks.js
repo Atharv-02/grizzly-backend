@@ -21,7 +21,6 @@ const TaskSchema = new mongoose.Schema({
     type: String,
     required: [true, "Must Provide a hash"],
     trim: true,
-    maxlength: [40, "name cannot be more than 40 characters"],
   },
 });
 
