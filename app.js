@@ -52,7 +52,7 @@ app.post("/send", async (req, res) => {
   const result = await axios(config);
 
   console.log(result.data);
-
+  const hash = await hashes.create(req.body);
   res.send(result.data);
 });
 app.post("/delete", async (req, res) => {
@@ -66,18 +66,18 @@ app.post("/delete", async (req, res) => {
   };
   const result = await axios(config);
   console.log(result);
-  res.send("hello");
+  res.send(result);
 });
 app.get("/all-nft", async (req, res) => {
   const allHash = await hashes.find({});
-  const sendData = allHash.map((hashed) => {
-    return {
-      _id: hashed._id,
-      uri: `https://gateway.pinata.cloud/ipfs/${hashed.hash}`,
-    };
-  });
+  // const sendData = allHash.map((hashed) => {
+  //   return {
+  //     _id: hashed._id,
+  //     uri: `https://gateway.pinata.cloud/ipfs/${hashed.hash}`,
+  //   };
+  // });
 
-  res.json(sendData);
+  res.json({ allHash });
 });
 app.get("/single-nft/:id", async (req, res) => {
   const { id: taskID } = req.params;
